@@ -4,8 +4,8 @@ import { CheckCircle } from 'lucide-react';
 
 export const ThankYou: React.FC = () => {
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center bg-slate-50 px-6 text-center">
-      <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-8 animate-bounce">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-6 text-center pt-32 pb-12">
+      <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-8 animate-bounce shadow-lg shadow-green-500/20">
         <CheckCircle size={40} strokeWidth={3} />
       </div>
       
