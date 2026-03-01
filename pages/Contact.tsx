@@ -120,6 +120,7 @@ export const Contact: React.FC = () => {
           <form 
             name="contact" 
             method="POST" 
+            action="/merci"
             data-netlify="true" 
             netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
@@ -127,9 +128,9 @@ export const Contact: React.FC = () => {
           >
             {/* Netlify Config */}
             <input type="hidden" name="form-name" value="contact" />
-            <p className="hidden">
+            <div className="hidden">
               <label>Ne pas remplir: <input name="bot-field" value={formData['bot-field']} onChange={handleChange} /></label>
-            </p>
+            </div>
 
             {/* Main Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
