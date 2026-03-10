@@ -11,7 +11,9 @@ interface PricingCardProps {
   fidelityPrice: number;
   refreshOption: string;
   backgroundImage?: string;
-  cycleDuration: 12 | 24;
+  cycleDuration: 12 | 24 | 36;
+  packType: 'ONE' | 'FIVE';
+  isGold?: boolean;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({ 
@@ -23,7 +25,9 @@ const PricingCard: React.FC<PricingCardProps> = ({
   fidelityPrice,
   refreshOption,
   backgroundImage,
-  cycleDuration
+  cycleDuration,
+  packType,
+  isGold = false
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -43,9 +47,50 @@ const PricingCard: React.FC<PricingCardProps> = ({
     setOpacity(0);
   };
 
-  // Determine offer type for state passing
-  const offerType = title.includes('ONE') ? 'ONE' : 'FIVE';
   const engagementText = `${cycleDuration} mois`;
+
+  // --- Custom Styles per Card Duration ---
+  let cardContainerClass = "";
+  let titleClass = "";
+  let priceClass = "";
+  let checkBgClass = "";
+  let buttonClass = "";
+  let overlayClass = "";
+  let prevPriceClass = "";
+
+  if (cycleDuration === 12) {
+    // 12 Mois: White card, White button
+    cardContainerClass = "bg-white border-slate-200 shadow-lg text-slate-900";
+    titleClass = "text-slate-500";
+    priceClass = "text-slate-900";
+    checkBgClass = "bg-slate-100 text-slate-500";
+    buttonClass = "bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 shadow-sm";
+    prevPriceClass = "text-slate-400";
+  } else if (cycleDuration === 24) {
+    // 24 Mois: Light/Violet card, Purple button
+    cardContainerClass = "bg-white border-purple-100 shadow-xl shadow-purple-500/10 text-slate-900";
+    titleClass = "text-purple-600";
+    priceClass = "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600"; // Gradient Purple Price
+    checkBgClass = "bg-purple-50 text-purple-600";
+    buttonClass = "bg-gradient-to-r from-purple-600 via-fuchsia-500 to-pink-600 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30 hover:scale-[1.02]"; // Enhanced Gradient
+    overlayClass = "bg-white/40"; 
+    prevPriceClass = "text-slate-400";
+  } else if (cycleDuration === 36) {
+    // 36 Mois: Blue/Aurora card, Yellow button
+    cardContainerClass = "border-blue-500/30 shadow-xl shadow-blue-900/20 text-blue-950"; 
+    
+    // Unified Gold gradient for Title, Price, and Suffix (Lighter/Brighter)
+    const goldGradient = "text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 drop-shadow-sm";
+    
+    titleClass = goldGradient + " font-extrabold tracking-tight"; 
+    priceClass = goldGradient; 
+    
+    checkBgClass = "bg-blue-600 text-white shadow-sm"; 
+    // Gradient Gold Button with Hover Scale
+    buttonClass = "bg-gradient-to-r from-yellow-400 to-orange-400 text-blue-900 font-bold hover:shadow-xl hover:scale-[1.02] shadow-lg shadow-orange-400/20 transition-all duration-300";
+    overlayClass = ""; 
+    prevPriceClass = "text-blue-900/60 font-semibold"; 
+  }
 
   return (
     <div 
@@ -53,47 +98,58 @@ const PricingCard: React.FC<PricingCardProps> = ({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative flex flex-col p-8 rounded-3xl overflow-hidden border ${recommended ? 'shadow-xl shadow-purple-500/10 border-purple-200 z-10 bg-white' : 'bg-white border-slate-200 shadow-lg'}`}
+      className={`relative flex flex-col p-8 rounded-3xl overflow-hidden border transition-all duration-300 ${cardContainerClass}`}
     >
       {/* Spotlight Effect Layer */}
       <div 
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 z-0"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(168, 85, 247, 0.1), transparent 40%)`
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.1), transparent 40%)`
         }}
       />
       
       {/* Background Image if provided */}
       {backgroundImage && (
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30 pointer-events-none z-0"
+          className="absolute inset-0 bg-cover bg-center z-0"
           style={{ backgroundImage: `url('${backgroundImage}')` }}
-        ></div>
+        >
+          {/* Custom Overlay */}
+          {overlayClass && <div className={`absolute inset-0 backdrop-blur-[1px] ${overlayClass}`}></div>}
+        </div>
       )}
       
       <div className="relative z-20 flex flex-col h-full">
         {recommended && (
-          <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg">
-            Recommandé
+          <div className="absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider shadow-lg">
+            Best Seller
           </div>
         )}
         
         <div className="mb-8 mt-4">
-          <h3 className={`text-lg font-bold mb-2 ${recommended ? 'text-purple-600' : 'text-slate-500'}`}>{title}</h3>
-          <div className="flex items-baseline gap-1">
-            <span className="text-5xl font-extrabold text-slate-900">{price}€</span>
-            <span className="text-slate-500 font-medium">/ mois</span>
+          <h3 className={`text-lg font-bold mb-2 ${titleClass}`}>{title}</h3>
+          <div className="flex items-baseline gap-2">
+            <span className={`text-5xl font-extrabold ${priceClass}`}>{price}€</span>
+            <span className={`font-medium ${cycleDuration === 36 ? priceClass : 'text-slate-500'}`}>/ mois</span>
           </div>
           {prevPrice && (
-            <div className="text-slate-400 line-through text-sm mt-1">{prevPrice}€ / mois</div>
+            <div className="relative inline-block mt-2">
+              <span className={`text-lg font-semibold ${prevPriceClass}`}>
+                {prevPrice}€ / mois
+              </span>
+              {/* Red Horizontal Line (Thinner) */}
+              <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
+                <div className="w-full h-[1px] bg-red-500 shadow-sm"></div>
+              </div>
+            </div>
           )}
         </div>
 
         <ul className="flex-1 space-y-4 mb-8">
           {features.map((feat, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm text-slate-600">
-              <div className={`mt-0.5 p-0.5 rounded-full ${recommended ? 'bg-purple-100 text-purple-600' : 'bg-slate-100 text-slate-500'}`}>
+            <li key={idx} className={`flex items-start gap-3 text-sm ${cycleDuration === 36 ? 'text-blue-950 font-medium' : 'text-slate-600'}`}>
+              <div className={`mt-0.5 p-0.5 rounded-full ${checkBgClass}`}>
                 <Check size={12} strokeWidth={3} />
               </div>
               {feat}
@@ -101,23 +157,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
           ))}
         </ul>
 
-        <div className="border-t border-slate-100 pt-6 mb-8">
-           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Fidélité (après 24 mois)</p>
-           <div className="text-sm text-slate-600">
-             <span className="font-bold text-slate-900">{fidelityPrice}€ / mois</span> + {refreshOption}
-           </div>
-        </div>
-
-        {/* Improved Button Styling: Shorter height (py-3) */}
         <div className="mt-auto">
           <Link 
             to="/contact"
-            state={{ preselectedOffer: offerType, preselectedCycle: engagementText }}
-            className={`block w-full py-3 px-8 rounded-xl font-bold text-base text-center transition-all ${
-              recommended 
-                ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white shadow-xl shadow-purple-500/20 hover:shadow-2xl hover:shadow-purple-500/30' 
-                : 'bg-slate-50 text-slate-900 hover:bg-slate-100 border border-slate-200'
-            }`}
+            state={{ preselectedOffer: packType, preselectedCycle: engagementText }}
+            className={`block w-full py-3 px-8 rounded-xl font-bold text-base text-center transition-all ${buttonClass}`}
           >
             Choisir cette offre
           </Link>
@@ -150,7 +194,7 @@ const FaqItem: React.FC<{ question: string, answer: string }> = ({ question, ans
 };
 
 export const Offers: React.FC = () => {
-  const [cycle, setCycle] = useState<12 | 24>(24);
+  const [selectedPack, setSelectedPack] = useState<'ONE' | 'FIVE'>('FIVE');
 
   const faqData = [
     { q: "Qu'est-ce qui est inclus dans le ticket de maintenance ?", a: "Un ticket correspond à une modification simple de 10-15 minutes : changement de texte, remplacement d'image, modification d'horaire ou de coordonnées. Les demandes plus complexes font l'objet d'un devis séparé." },
@@ -169,6 +213,26 @@ export const Offers: React.FC = () => {
     { q: "J'ai déjà un site, pouvez-vous le refaire ?", a: "Avec plaisir ! C'est souvent l'occasion de repartir sur des bases saines et modernes." },
   ];
 
+  const features = selectedPack === 'ONE' ? [
+    "1 Page unique longue",
+    "Design premium responsive",
+    "Mise en ligne Netlify + SSL",
+    "2 rounds de retours inclus",
+    "Maintenance : 6 tickets / an",
+    "Support correctif 14 jours"
+  ] : [
+    "Jusqu'à 5 pages",
+    "Design premium responsive sur-mesure",
+    "Optimisation images & vitesse",
+    "Mise en ligne Netlify + SSL",
+    "2 rounds de retours inclus",
+    "Maintenance : 1 ticket / mois",
+    "Support correctif 14 jours"
+  ];
+
+  const refreshOption = selectedPack === 'ONE' ? "Mini refresh (60-90 min)" : "Mini refresh (2h) ou +2 tickets bonus";
+  const fidelityPrice = selectedPack === 'ONE' ? 89 : 149;
+
   return (
     <div className="bg-slate-50 min-h-screen">
       
@@ -176,77 +240,83 @@ export const Offers: React.FC = () => {
       <section className="pt-32 pb-12 px-6 text-center">
         <h1 className="text-4xl font-bold text-slate-900 mb-4">Des tarifs simples et transparents</h1>
         <p className="text-slate-500 max-w-2xl mx-auto">
-          Investissez dans votre image sans trésorerie lourde. Choisissez la durée de votre engagement.
+          Investissez dans votre image sans trésorerie lourde. Choisissez votre pack et la durée de votre engagement.
         </p>
 
-        {/* Toggle - Button based as requested */}
+        {/* Pack Toggle */}
         <div className="flex justify-center items-center mt-10">
            <div className="inline-flex bg-white p-1 rounded-full border border-slate-200 shadow-sm relative z-10">
               <button 
-                onClick={() => setCycle(12)}
-                className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${cycle === 12 ? 'bg-slate-100 text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}
+                onClick={() => setSelectedPack('ONE')}
+                className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${selectedPack === 'ONE' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-500 hover:text-slate-700'}`}
               >
-                Engagement 12 mois
+                Pack ONE
               </button>
               
               <button 
-                onClick={() => setCycle(24)}
-                className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 ${cycle === 24 ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-700'}`}
+                onClick={() => setSelectedPack('FIVE')}
+                className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${selectedPack === 'FIVE' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-700'}`}
               >
-                Engagement 24 mois
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${cycle === 24 ? 'bg-white/20 text-white' : 'bg-green-100 text-green-700'}`}>
-                  -20%
-                </span>
+                Pack FIVE
               </button>
            </div>
         </div>
       </section>
 
       {/* Pricing Cards */}
-      <section className="px-6 pb-24 max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+      <section className="px-6 pb-24 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 items-stretch">
           
+          {/* 12 Mois */}
           <PricingCard 
-            title="Pack ONE — Landing"
-            price={cycle === 24 ? 99 : 129}
-            prevPrice={cycle === 24 ? 129 : undefined}
-            features={[
-              "1 Page unique longue (Hero, Offre, FAQ, Contact)",
-              "Design premium responsive",
-              "Mise en ligne Netlify + SSL",
-              "2 rounds de retours inclus",
-              "Maintenance : 6 tickets / an (1 tous les 2 mois)",
-              "Support correctif 14 jours"
-            ]}
-            fidelityPrice={89}
-            refreshOption="Mini refresh (60-90 min)"
-            cycleDuration={cycle}
+            title="Engagement 12 mois"
+            price={selectedPack === 'ONE' ? 149 : 199}
+            features={features}
+            fidelityPrice={fidelityPrice}
+            refreshOption={refreshOption}
+            cycleDuration={12}
+            packType={selectedPack}
           />
 
+          {/* 24 Mois */}
           <PricingCard 
-            title="Pack FIVE — Site Vitrine"
-            price={cycle === 24 ? 159 : 199}
-            prevPrice={cycle === 24 ? 199 : undefined}
-            features={[
-              "Jusqu'à 5 pages (Accueil + 4 pages)",
-              "Design premium responsive sur-mesure",
-              "Optimisation images & vitesse",
-              "Mise en ligne Netlify + SSL",
-              "2 rounds de retours inclus",
-              "Maintenance : 1 ticket / mois",
-              "Support correctif 14 jours"
-            ]}
-            recommended={true}
-            fidelityPrice={149}
-            refreshOption="Mini refresh (2h) ou +2 tickets bonus"
+            title="Engagement 24 mois"
+            price={selectedPack === 'ONE' ? 99 : 159}
+            prevPrice={selectedPack === 'ONE' ? 149 : 199}
+            features={features}
+            fidelityPrice={fidelityPrice}
+            refreshOption={refreshOption}
+            cycleDuration={24}
+            packType={selectedPack}
             backgroundImage="https://res.cloudinary.com/dnmhz4hmz/image/upload/q_auto,f_auto/v1770646359/bg-1_bsgloe.png"
-            cycleDuration={cycle}
+          />
+
+          {/* 36 Mois - Highlighted */}
+          <PricingCard 
+            title="Engagement 36 mois"
+            price={selectedPack === 'ONE' ? 79 : 129}
+            prevPrice={selectedPack === 'ONE' ? 149 : 199}
+            features={features}
+            fidelityPrice={fidelityPrice}
+            refreshOption={refreshOption}
+            cycleDuration={36}
+            packType={selectedPack}
+            recommended={true}
+            isGold={true}
+            backgroundImage="https://res.cloudinary.com/dnmhz4hmz/image/upload/f_auto,q_auto/v1770647563/bg-4_sgzhkx.png"
           />
 
         </div>
 
+        {/* Fidelity Mention */}
+        <div className="mt-12 text-center">
+          <p className="text-slate-500 italic max-w-2xl mx-auto">
+            "Engagement de 12, 24 ou 36 mois. Le programme de fidélité (mensualité réduite) s'applique automatiquement après 24 mois de partenariat effectif."
+          </p>
+        </div>
+
         {/* Extra Info Options */}
-        <div className="mt-16 bg-white rounded-2xl p-8 border border-slate-200 text-center">
+        <div className="mt-16 bg-white rounded-2xl p-8 border border-slate-200 text-center max-w-4xl mx-auto">
           <h3 className="font-bold text-slate-800 mb-4">Options supplémentaires</h3>
           <div className="flex flex-col md:flex-row justify-center gap-8 text-sm text-slate-600">
             <div className="flex items-center justify-center gap-2">
@@ -293,7 +363,7 @@ export const Offers: React.FC = () => {
         <div className="max-w-4xl mx-auto text-xs text-slate-400 leading-relaxed">
           <p className="font-bold mb-2 uppercase tracking-wide">Conditions résumées</p>
           <p>
-            Offres soumises à engagement de 12 ou 24 mois. Paiement par virement bancaire. 
+            Offres soumises à engagement de 12, 24 ou 36 mois. Paiement par virement bancaire. 
             Le site reste la propriété d'Oversloth jusqu'au terme de l'engagement ou du paiement intégral des mensualités dues. 
             Tout mois entamé est dû. La maintenance incluse ne couvre pas la refonte graphique complète ni l'ajout de nouvelles fonctionnalités complexes.
           </p>

@@ -5,14 +5,32 @@ import { ArrowRight, Check, Zap, Shield, Sparkles, CheckCircle2, XCircle, Code, 
 const LogoBar = () => (
   <div className="w-full border-b border-slate-100 bg-white py-8 overflow-hidden relative z-20">
     <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <span className="text-sm font-medium text-slate-500 uppercase tracking-wide">
-        Pensé pour artisans & TPE
+      <span className="text-sm font-medium text-slate-500 uppercase tracking-wide text-center md:text-left">
+        Propulsé par les meilleurs outils du web
       </span>
-      <div className="flex gap-8 text-slate-400 grayscale opacity-70">
-         {/* Placeholder generic logos */}
-        <div className="flex items-center gap-2 font-bold"><Shield size={20}/> SecureWeb</div>
-        <div className="flex items-center gap-2 font-bold"><Zap size={20}/> FastLoad</div>
-        <div className="flex items-center gap-2 font-bold"><Sparkles size={20}/> CleanDesign</div>
+      <div className="flex flex-wrap justify-center md:justify-end gap-8 md:gap-12 items-center">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Netlify_logo.svg" 
+          alt="Netlify" 
+          className="h-7 object-contain transition-all duration-300 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default" 
+        />
+        <div className="flex items-center gap-2 transition-all duration-300 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" className="h-7 object-contain" />
+          <span className="font-bold text-xl text-slate-800 tracking-tight">GitHub</span>
+        </div>
+        <img 
+          src="https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_200/v1/logo/for_white_bg/cloudinary_logo_for_white_bg.svg" 
+          alt="Cloudinary" 
+          className="h-7 object-contain transition-all duration-300 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default" 
+        />
+        <div className="flex items-center gap-2 transition-all duration-300 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
+          <img 
+            src="https://res.cloudinary.com/dnmhz4hmz/image/upload/f_auto,q_auto/v1773155341/download_ciu7ck.png" 
+            alt="OVH" 
+            className="h-6 object-contain" 
+          />
+          <span className="font-bold text-xl text-slate-800 tracking-tight">OVH</span>
+        </div>
       </div>
     </div>
   </div>
@@ -204,7 +222,7 @@ export const Home: React.FC = () => {
               Nouvelle offre 2026 disponible
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-sm">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-sm">
               Votre site vitrine,<br />
               <Typewriter />
             </h1>

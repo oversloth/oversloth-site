@@ -4,10 +4,11 @@ import { Menu, X, ArrowRight, Check, ChevronDown, CheckCircle, XCircle, Mail, Ph
 import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Offers } from './pages/Offers';
-import { Realizations } from './pages/Realizations';
 import { Contact } from './pages/Contact';
 import { ThankYou } from './pages/ThankYou';
 import { Mentions } from './pages/Mentions';
+import { Confidentialite } from './pages/Confidentialite';
+import { Cgv } from './pages/Cgv';
 import { Models } from './pages/Models';
 import { CustomCursor } from './components/CustomCursor';
 import { SmoothScroll } from './components/SmoothScroll';
@@ -31,11 +32,12 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/offres" element={<Offers />} />
-          <Route path="/realisations" element={<Realizations />} />
           <Route path="/modeles" element={<Models />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/merci" element={<ThankYou />} />
           <Route path="/mentions" element={<Mentions />} />
+          <Route path="/confidentialite" element={<Confidentialite />} />
+          <Route path="/cgv" element={<Cgv />} />
         </Routes>
       </Layout>
     </HashRouter>

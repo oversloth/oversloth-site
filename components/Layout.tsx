@@ -166,8 +166,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <h4 className="font-semibold text-slate-900 mb-4">Légal</h4>
               <ul className="space-y-2 text-sm text-slate-500">
                 <li><Link to="/mentions" className="hover:text-purple-600 transition-colors">Mentions Légales</Link></li>
-                <li><Link to="/mentions" className="hover:text-purple-600 transition-colors">Confidentialité</Link></li>
-                <li><Link to="/mentions" className="hover:text-purple-600 transition-colors">CGV</Link></li>
+                <li><Link to="/confidentialite" className="hover:text-purple-600 transition-colors">Confidentialité</Link></li>
+                <li><Link to="/cgv" className="hover:text-purple-600 transition-colors">CGV</Link></li>
               </ul>
             </div>
           </div>

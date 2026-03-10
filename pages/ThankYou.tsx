@@ -11,7 +11,7 @@ export const ThankYou: React.FC = () => {
       
       <h1 className="text-4xl font-bold text-slate-900 mb-4">Message bien reçu !</h1>
       <p className="text-lg text-slate-500 max-w-lg mb-12">
-        Merci de nous avoir contactés. Notre équipe va étudier votre demande et reviendra vers vous sous 24h ouvrées.
+        Merci de m'avoir contacté. Je vais étudier votre demande personnellement et je reviendrai vers vous sous 24h ouvrées.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">
