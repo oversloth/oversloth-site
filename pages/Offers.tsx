@@ -8,8 +8,6 @@ interface PricingCardProps {
   prevPrice?: number;
   features: string[];
   recommended?: boolean;
-  fidelityPrice: number;
-  refreshOption: string;
   backgroundImage?: string;
   cycleDuration: 12 | 24 | 36;
   packType: 'ONE' | 'FIVE';
@@ -22,8 +20,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
   prevPrice,
   features, 
   recommended = false, 
-  fidelityPrice,
-  refreshOption,
   backgroundImage,
   cycleDuration,
   packType,
@@ -201,14 +197,14 @@ export const Offers: React.FC = () => {
     { q: "Puis-je changer d'offre en cours de route ?", a: "Oui, vous pouvez passer de l'offre ONE à FIVE à tout moment. Le nouvel engagement repartira pour la durée choisie." },
     { q: "Le site est-il optimisé pour Google (SEO) ?", a: "Absolument. Nous respectons les meilleures pratiques techniques (structure, balises, vitesse, responsive) pour que Google adore votre site." },
     { q: "Qui héberge le site ?", a: "Nous gérons l'hébergement sur des serveurs ultra-performants (Netlify) avec un certificat SSL inclus (le cadenas vert)." },
-    { q: "Que se passe-t-il après 24 mois ?", a: "Le site vous appartient ! Vous pouvez continuer avec notre tarif fidélité réduit pour garder la maintenance, ou récupérer le site et le gérer vous-même." },
-    { q: "Si je veux arrêter avant la fin ?", a: "Les mois restants de l'engagement sont dus pour pouvoir récupérer la propriété du site, conformément au contrat de leasing." },
+    { q: "Que se passe-t-il à la fin de mon engagement ?", a: "À l'issue de votre engagement, le site et le nom de domaine vous sont transférés définitivement. Vous pouvez alors le gérer vous-même ou continuer avec nous sur un abonnement réduit." },
+    { q: "Si je veux arrêter avant la fin ?", a: "Les mensualités restantes jusqu'au terme de l'engagement sont dues. Le site sera suspendu à la date de résiliation et transféré uniquement après règlement intégral." },
     { q: "Fournissez-vous les textes et les images ?", a: "Idéalement, vous nous fournissez votre contenu. Si vous n'avez rien, nous pouvons utiliser des images libres de droits et vous aider à structurer vos textes (optionnel)." },
     { q: "Y a-t-il des frais cachés ?", a: "Non. Le prix affiché est le prix payé. Les seules options payantes sont les tickets supplémentaires ou l'ajout de pages non prévues." },
     { q: "Puis-je avoir un nom de domaine en .fr ou .com ?", a: "Oui, la configuration de votre nom de domaine est incluse lors de la mise en ligne." },
     { q: "Faites-vous du e-commerce ?", a: "Non, Oversloth est spécialisé dans les sites vitrines performants. Pour du e-commerce complexe, nous pouvons vous rediriger vers des partenaires." },
     { q: "Le site sera-t-il compatible mobile ?", a: "Oui, 100%. Nous adoptons une approche 'Mobile First'. Votre site sera parfait sur smartphone, tablette et ordinateur." },
-    { q: "Comment se passe le paiement ?", a: "Par virement bancaire mensuel, mis en place au début du contrat." },
+    { q: "Comment se passe le paiement ?", a: "Par virement bancaire mensuel ou prélèvement automatique selon votre préférence. Les détails sont précisés lors de la signature du contrat." },
     { q: "Combien de temps pour la mise en ligne ?", a: "Une fois les éléments reçus, comptez 7 à 10 jours ouvrés pour la première version." },
     { q: "J'ai déjà un site, pouvez-vous le refaire ?", a: "Avec plaisir ! C'est souvent l'occasion de repartir sur des bases saines et modernes." },
   ];
@@ -229,9 +225,6 @@ export const Offers: React.FC = () => {
     "Maintenance : 1 ticket / mois",
     "Support correctif 14 jours"
   ];
-
-  const refreshOption = selectedPack === 'ONE' ? "Mini refresh (60-90 min)" : "Mini refresh (2h) ou +2 tickets bonus";
-  const fidelityPrice = selectedPack === 'ONE' ? 89 : 149;
 
   return (
     <div className="bg-slate-50 min-h-screen">
@@ -272,8 +265,6 @@ export const Offers: React.FC = () => {
             title="Engagement 12 mois"
             price={selectedPack === 'ONE' ? 149 : 199}
             features={features}
-            fidelityPrice={fidelityPrice}
-            refreshOption={refreshOption}
             cycleDuration={12}
             packType={selectedPack}
           />
@@ -284,8 +275,6 @@ export const Offers: React.FC = () => {
             price={selectedPack === 'ONE' ? 99 : 159}
             prevPrice={selectedPack === 'ONE' ? 149 : 199}
             features={features}
-            fidelityPrice={fidelityPrice}
-            refreshOption={refreshOption}
             cycleDuration={24}
             packType={selectedPack}
             backgroundImage="https://res.cloudinary.com/dnmhz4hmz/image/upload/q_auto,f_auto/v1770646359/bg-1_bsgloe.png"
@@ -297,8 +286,6 @@ export const Offers: React.FC = () => {
             price={selectedPack === 'ONE' ? 79 : 129}
             prevPrice={selectedPack === 'ONE' ? 149 : 199}
             features={features}
-            fidelityPrice={fidelityPrice}
-            refreshOption={refreshOption}
             cycleDuration={36}
             packType={selectedPack}
             recommended={true}
@@ -306,13 +293,6 @@ export const Offers: React.FC = () => {
             backgroundImage="https://res.cloudinary.com/dnmhz4hmz/image/upload/f_auto,q_auto/v1770647563/bg-4_sgzhkx.png"
           />
 
-        </div>
-
-        {/* Fidelity Mention */}
-        <div className="mt-12 text-center">
-          <p className="text-slate-500 italic max-w-2xl mx-auto">
-            "Engagement de 12, 24 ou 36 mois. Le tarif fidélité réduit s'applique automatiquement à partir du 25ème mois de partenariat effectif."
-          </p>
         </div>
 
         {/* Extra Info Options */}

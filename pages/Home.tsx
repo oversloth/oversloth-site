@@ -193,7 +193,7 @@ const Typewriter = () => {
 
 export const Home: React.FC = () => {
   const faqData = [
-    { q: "Le site m'appartient-il ?", a: "Oui, le site vous est transféré intégralement à la fin de la période d'engagement ou une fois la totalité des mensualités réglées." },
+    { q: "Le site m'appartient-il ?", a: "Le site est mis à votre disposition pendant toute la durée de votre engagement. À l'issue de celui-ci, le code source et le nom de domaine vous sont transférés définitivement. Vous en devenez propriétaire à part entière." },
     { q: "Puis-je modifier le contenu moi-même ?", a: "Pour garantir un design impeccable, nous gérons la maintenance. Vous nous envoyez un message, on modifie dans la journée. Simple." },
     { q: "Quels sont les délais de mise en ligne ?", a: "Entre 3 et 10 jours ouvrés selon le pack choisi, une fois que nous avons reçu vos éléments (textes, images)." },
     { q: "Y a-t-il des frais cachés ?", a: "Aucun. L'hébergement, le nom de domaine, la maintenance et le SSL sont inclus dans l'abonnement mensuel." },
