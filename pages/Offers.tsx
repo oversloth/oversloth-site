@@ -123,7 +123,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       <div className="relative z-20 flex flex-col h-full">
         {recommended && (
           <div className="absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider shadow-lg">
-            Best Seller
+            Meilleure valeur
           </div>
         )}
         
@@ -311,7 +311,7 @@ export const Offers: React.FC = () => {
         {/* Fidelity Mention */}
         <div className="mt-12 text-center">
           <p className="text-slate-500 italic max-w-2xl mx-auto">
-            "Engagement de 12, 24 ou 36 mois. Le programme de fidélité (mensualité réduite) s'applique automatiquement après 24 mois de partenariat effectif."
+            "Engagement de 12, 24 ou 36 mois. Le tarif fidélité réduit s'applique automatiquement à partir du 25ème mois de partenariat effectif."
           </p>
         </div>
 

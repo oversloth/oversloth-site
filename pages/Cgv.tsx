@@ -20,7 +20,7 @@ export const Cgv: React.FC = () => {
           <p className="text-sm leading-relaxed">
             Le contrat est conclu pour une durée initiale définie lors de la souscription au service. Cette durée peut être de douze, vingt-quatre ou trente-six mois selon l’offre choisie par le client.<br/><br/>
             À l’issue de la période d’engagement initiale, le contrat est automatiquement renouvelé par tacite reconduction pour des périodes successives de douze mois, sauf résiliation effectuée par le client.<br/><br/>
-            Toute demande de résiliation devra être adressée par email avec accusé de réception au moins deux mois avant la date anniversaire du contrat.
+            Toute demande de résiliation devra être adressée par email avec accusé de réception au moins deux mois avant la date d'échéance du contrat.
           </p>
         </section>
 
@@ -54,9 +54,7 @@ export const Cgv: React.FC = () => {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-800">Article 6 – Résiliation anticipée</h2>
           <p className="text-sm leading-relaxed">
-            Toute résiliation du contrat avant la fin de la période d’engagement entraîne une régularisation tarifaire.<br/><br/>
-            Les mensualités déjà versées pourront être recalculées sur la base du tarif correspondant à la durée d’engagement réellement effectuée. La différence éventuelle devient immédiatement exigible.<br/><br/>
-            Une indemnité forfaitaire de rupture équivalente à trois mois de mensualités sera également facturée au client.
+            Toute résiliation du contrat avant la fin de la période d'engagement entraîne le maintien des mensualités dues jusqu'au terme prévu. Les mensualités restantes deviennent immédiatement exigibles à la date de résiliation. Aucune mensualité déjà versée ne sera remboursée. Le site sera suspendu à la date de résiliation et transféré au client uniquement après règlement intégral des sommes dues.
           </p>
         </section>
 
@@ -65,7 +63,7 @@ export const Cgv: React.FC = () => {
           <p className="text-sm leading-relaxed">
             Pendant toute la durée du contrat, le site internet réalisé dans le cadre du service reste la propriété d’Oversloth.<br/><br/>
             Après vingt-quatre mois de cotisations effectives, le client peut demander le transfert de propriété du site. Ce transfert implique une opération technique de migration et de remise des fichiers nécessaires.<br/><br/>
-            Des frais techniques de 350 euros hors taxes seront appliqués afin de couvrir cette intervention.
+            Des frais techniques de 149 euros hors taxes seront appliqués afin de couvrir cette intervention.
           </p>
         </section>
 

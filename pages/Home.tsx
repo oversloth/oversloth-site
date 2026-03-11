@@ -198,7 +198,7 @@ export const Home: React.FC = () => {
     { q: "Quels sont les délais de mise en ligne ?", a: "Entre 3 et 10 jours ouvrés selon le pack choisi, une fois que nous avons reçu vos éléments (textes, images)." },
     { q: "Y a-t-il des frais cachés ?", a: "Aucun. L'hébergement, le nom de domaine, la maintenance et le SSL sont inclus dans l'abonnement mensuel." },
     { q: "Le site est-il optimisé pour Google (SEO) ?", a: "Oui, tous nos sites respectent les standards techniques de Google (vitesse, balisage, mobile-friendly) pour un référencement naturel optimal." },
-    { q: "Que se passe-t-il si je veux arrêter ?", a: "Vous pouvez arrêter à la fin de votre engagement (12 ou 24 mois). Si vous arrêtez avant, les mensualités restantes sont dues." }
+    { q: "Que se passe-t-il si je veux arrêter ?", a: "Vous pouvez arrêter à la fin de votre engagement (12, 24 ou 36 mois). Si vous souhaitez arrêter avant la fin, les mensualités restantes jusqu'au terme de l'engagement sont dues." }
   ];
 
   return (

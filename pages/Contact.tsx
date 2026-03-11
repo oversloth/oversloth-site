@@ -189,7 +189,7 @@ export const Contact: React.FC = () => {
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-slate-700">Engagement</label>
                 <div className="grid grid-cols-2 gap-2">
-                  {['12 mois', '24 mois', '36 mois', 'On voit ça ensemble'].map((opt) => (
+                  {['12 mois', '24 mois', '36 mois', 'Je ne sais pas encore'].map((opt) => (
                     <div 
                       key={opt}
                       onClick={() => handleEngagementChange(opt)}
