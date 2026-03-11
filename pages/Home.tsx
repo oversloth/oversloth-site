@@ -357,7 +357,7 @@ export const Home: React.FC = () => {
               { label: "Délai de livraison", over: "ONE 3-5j / FIVE 5-10j", trad: "1-2 mois" },
               { label: "Maintenance", over: "Incluse", trad: "Option coûteuse" },
               { label: "Design", over: "Premium & Moderne", trad: "Variable" },
-              { label: "Engagement", over: "12 ou 24 mois (au choix)", trad: "Acompte non remboursable" }
+              { label: "Engagement", over: "12, 24 ou 36 mois (au choix)", trad: "Acompte non remboursable" }
             ].map((row, idx) => (
               <div key={idx} className="grid grid-cols-3 p-6 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors items-center">
                 <div className="font-medium text-slate-700 text-xs md:text-base">{row.label}</div>

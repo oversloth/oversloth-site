@@ -63,14 +63,7 @@ export const Confidentialite: React.FC = () => {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-slate-800">Section 9 — Base légale du traitement :</h2>
-          <p className="text-sm leading-relaxed">
-            Le traitement de vos données repose sur votre consentement explicite lors de la soumission du formulaire (article 6.1.a du RGPD) ainsi que sur l'intérêt légitime d'Oversloth à traiter les demandes commerciales entrantes (article 6.1.f du RGPD).
-          </p>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-slate-800">Section 10 — Réclamation auprès de la CNIL :</h2>
+          <h2 className="text-2xl font-bold text-slate-800">Section 9 — Réclamation auprès de la CNIL :</h2>
           <p className="text-sm leading-relaxed">
             Si vous estimez que vos droits ne sont pas respectés, vous disposez du droit d'introduire une réclamation auprès de la Commission Nationale de l'Informatique et des Libertés (CNIL), autorité de contrôle française, sur le site <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">www.cnil.fr</a> ou par courrier à l'adresse : CNIL, 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
           </p>
